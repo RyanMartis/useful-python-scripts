@@ -5,3 +5,5 @@
 - I'd try using it for maybe a fun way to see stock swings and dips
 
 - I could track prices via some kind of price history feed? ... seems interesting
+
+
