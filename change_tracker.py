@@ -7,7 +7,9 @@ import matplotlib.dates as mdates
 import matplotlib.ticker as ticker
 from pprint import pprint
 from datetime import datetime
-
+# needed for animated charts
+import matplotlib.animation as animation
+from matplotlib import style
 
 # Get stock data from API
 tsla_stock_info = yf.Ticker('TSLA').info
@@ -16,6 +18,23 @@ tsla_previous_close_price = tsla_stock_info['regularMarketPreviousClose']
 tsla_price_history = yf.Ticker('TSLA').history(period='2y', # valid periods: 1d,5d,1mo,3mo,6mo,1y,2y,5y,10y,ytd,max
                                    interval='1wk', # valid intervals: 1m,2m,5m,15m,30m,60m,90m,1h,1d,5d,1wk,1mo,3mo
                                    actions=False)
+
+# matplotlib style spec
+style.use('fivethirtyeight')
+fig = plt.figure()
+ax1 = fig.add_subplot(1,1,1)
+
+# I need to pull a backlog of data (i.e. ticker.history(period, interval, actions...)
+# example pprint(yf.Ticker('TSLA').history(period='1d', interval='5m')) 
+# from this I can use the date and corresponding "close" price? 
+# every minute, we query again (not sure what the rate limit is here)
+
+# while looping, I'd need to get the "current price" and then a date (can likely set this to current date/time).
+# This might make sense to have a final list of dictionary elements (price and date)
+# then have pandas datafram and then plot this
+
+# Let's print this live list of data out every minute and see how it looks. 
+# once the data is good and updating as expected, animated graphs should work too
 
 # Get stock data from API
 tm_stock_info = yf.Ticker('TM').info
